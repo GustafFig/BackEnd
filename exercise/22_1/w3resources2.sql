@@ -6,8 +6,8 @@
 
 CREATE TABLE IF NOT EXISTS countries(
 	country_id CHAR(2),
-    country_name VARCHAR(50),
-    region_id INT
+  country_name VARCHAR(50),
+  region_id INT
 );
 
 DESC ex22day1.countries;
