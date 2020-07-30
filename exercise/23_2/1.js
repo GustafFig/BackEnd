@@ -1,6 +1,6 @@
 // DataBase retirada do link https://course.betrybe.com/back-end/mongodb/superheroes.json e incorporada com mongo import, arquivo nesse diretório
 
-coll = db.superheros;
+coll = db.superherose;
 
 // 1.Inspecione um documento para que você se familiarize com eles. Entenda os campos e os níveis existentes no documento escolhido
 coll.find()
@@ -46,13 +46,39 @@ coll.find({ $and: [
 ] });
 
 // 14. Selecione todos os super-heróis com 1.80m ou 2.00m de altura e que sejam publicados pela Marvel Comics.
+coll.find({
+  $or: [
+    { "aspects.height": 180 },
+    { "aspects.height": 200 }
+  ],
+  "publisher": "Marvel Comics"
+});
 
 // 15. Selecione todos os super-heróis que pesem entre 80kg e 100kg, sejam Humanos ou Mutantes, e não sejam publicados pela DC Comics.
+coll.find({
+  "aspects.weight": { $gt: 80, $lt: 100 },
+  "race": {
+    $in: ["human", "Human", "Mutant", "mutant"]
+  },
+  "publisher": { $ne: "DC Comics" }
+});
 
 // 16. Retorne o total de documentos que não contêm o campo race.
+coll.find({
+  race: { $exists: 0 }
+}).count();
 
 // 17. Retorne o total de documentos que contêm o campo hairColor.
+coll.find({
+  "aspects.hairColor": { $exists: 1 }
+}).count();
 
 // 18. Remova apenas um documento publicado pela Sony Pictures.
+coll.deleteMany({
+  "publisher": "Sony Pictures"
+});
 
 // 19. Remova todos os documentos publicados pelo George Lucas.
+coll.delete({
+  "publisher": "George Lucas"
+});
