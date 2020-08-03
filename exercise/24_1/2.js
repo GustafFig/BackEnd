@@ -2,7 +2,7 @@
 
 db.movies.updateOne(
   { "title": "Godzilla" },
-  { $set: { "budge": 1 } },
+  { $set: { "budget": 1 } },
 );
 
 // antes não existia budget nesse filme, agora ira existir com o valor 1
