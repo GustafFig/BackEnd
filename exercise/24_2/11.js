@@ -6,13 +6,15 @@
 
 db.movies.updateOne(
   { "title": "Batman", "cast.character": "Batman" },
-  { $set: { "cast.$.actor": "Christian Bale" } }
+  { $set: { "cast.$.actor": ["Christian Bale"] } }
 );
 db.movies.updateOne(
   { "title": "Batman", "cast.character": "Alfred" },
-  { $set: { "cast.$.actor": "Michael Caine" } }
+  { $set: { "cast.$.actor": ["Michael Caine"] } }
 );
 db.movies.updateOne(
   { "title": "Batman", "cast.character": "Coringa" },
-  { $set: { "cast.$.actor": "Heath Ledger" } }
+  { $set: { "cast.$.actor": ["Heath Ledger"] } }
 );
+
+// cast.actor needs to be an array on exercise 12
