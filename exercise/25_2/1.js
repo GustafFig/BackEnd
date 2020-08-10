@@ -4,8 +4,13 @@
 // calcule a idade usando a diferença entre a data corrente e a data de nascimento;
 // 1 dia é igual a 86400000 milissegundos.
 
-db.clientes.aggregation([
+db.clientes.aggregate([
   { $addFields: {
-    idade: { $subtract: ["$$NOW", ]}
-  } }
+    idade: { $floor: { 
+      $divide: [
+        { $subtract: ["$$NOW", "$dataNascimento"] }
+        , 31536000000
+      ]
+    } }
+  } },
 ]);
