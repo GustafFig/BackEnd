@@ -1,8 +1,5 @@
 // Descubra quais são os 5 clientes que gastaram o maior valor.
 
-// { $lookup: {
-
-// } },
 db.vendas.aggregate([
   { $match: {
     status: { $not: /AGUARDANDO PAGAMENTO/ }
