@@ -9,5 +9,6 @@ db.vendas.aggregate([
   { $match: {
     comprasQty: { $gt: 5 }
   } },
-  { $count: "clientes" }
+  { $count: "clientes" },
+  { $project: { _id: 0 } }
 ]);
