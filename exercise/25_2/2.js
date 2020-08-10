@@ -13,5 +13,7 @@ db.clientes.aggregate([
   } },
   { $match: {
     idade: { $gte: 18, $lt: 25 }
-  } }
+  } },
+  { $group: { _id: "$idade" } },
+  { $count: "jovensAdultos" }
 ]);
