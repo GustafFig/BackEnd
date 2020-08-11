@@ -21,6 +21,4 @@ db.clientes.aggregate([
   { $match: {
     "compras.dataVenda": { $gte: ISODate("2019-06-01"), $lte: ISODate("2019-03-31") }
   } },
-  { $project: { nome: 1 }},
-  { $count: "qty"}
 ]);
