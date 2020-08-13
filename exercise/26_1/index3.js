@@ -1,8 +1,3 @@
-/*
-Por último, modifique o script para que ele utilize o pacote inquirer para solicitar as informações ao usuário no terminal. Para entender como utilizar o inquirer, consulte a documentação no site do npm. Além disso, você pode precisar relembrar o que já aprendemos sobre Promises em outra aula.
-
-Observação: Utilize a propriedade validate das perguntas do inquirer para verificar se os valores digitados são números válidos.
-*/
 const inquirer = require('inquirer');
 const { createQuestionObject } = require('./createQuestionObject');
 

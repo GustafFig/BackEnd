@@ -1,13 +1,3 @@
-/*
-Agora, modifique o script acima para que ele informe se a pessoa, cujo IMC foi calculado, possui algum nível de obesidade. Considere a seguinte tabela para saber qual situação deve ser apresentada para cada resultado: 
-Abaixo de 18,5	
-Entre 18,5 e 24,9
-Entre 25,0 e 29,9
-Entre 30,0 e 34,9
-Entre 35,0 e 39,9
-40,0 e acima
-*/
-
 const readline = require('readline-sync');
 
 function IMC() {

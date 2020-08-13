@@ -1,15 +1,3 @@
-/*
-rie um script que, sem utilizar recursão, exiba o valor dos n primeiros elementos da sequência de fibonacci.
-
-Não imprima o valor 0, uma vez que ele não está incluso na sequência;
-Quando n = 10, exatamente 10 elementos devem ser exibidos;
-Utilize o pacote inquirer para solicitar o valor de n ao usuário;
-Utilize a propriedade validate do inquirer para validar o valor informado para n. A função de validação deve utilizar outras duas funções para garantir que n atenda às condições abaixo:
-
-Ser um número;
-Ser um inteiro.
-Lembre-se de converter o valor retornado pelo inquirer para inteiro utilizando parseInt(). Não esqueça de informar a base 10 como segundo parâmetro.
-*/
 const inquirer = require('inquirer');
 const { createQuestionObject } = require('./createQuestionObject');
 

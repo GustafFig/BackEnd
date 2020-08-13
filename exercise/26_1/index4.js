@@ -1,14 +1,3 @@
-/*
-Crie um script que, utilizando recursão, realize o fatorial de um número n.
-
-Utilize o pacote inquirer para solicitar o valor de n ao usuário;
-Utilize a propriedade validate do inquirer para validar o valor informado para n. A função de validação deve utilizar outras duas funções para garantir que n atenda às condições abaixo:
-
-Ser um número;
-Ser um inteiro.
-Lembre-se de converter o valor retornado pelo inquirer para inteiro utilizando parseInt(). Não esqueça de informar a base 10 como segundo parâmetro.
-
-*/
 const inquirer = require('inquirer');
 const { createQuestionObject } = require('./createQuestionObject');
 
