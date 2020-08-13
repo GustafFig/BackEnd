@@ -4,5 +4,6 @@ Um repositório para guardar os exercícios realizados na **Trybe** durante o m�
 
 Com conteúdos de
 
-1.MySQL
-2.MongoDB
+1. MySQL
+2. MongoDB
+3. Node
