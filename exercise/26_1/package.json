@@ -1,0 +1,20 @@
+{
+  "name": "calcula-imc",
+  "version": "1.0.0",
+  "description": "exercicio da Trybe bloco 26_1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "start2": "node index2.js",
+    "start3": "node index3.js",
+    "start4": "node index4.js",
+    "start5": "node index5.js"
+  },
+  "author": "Gustavo Figueiredo :smile:",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^7.3.3",
+    "readline-sync": "^1.4.10"
+  }
+}
