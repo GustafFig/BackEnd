@@ -1,4 +1,4 @@
-Exercício 1: Crie uma função que retorna uma promise:
+### Exercício 1: Crie uma função que retorna uma promise:
 
 * Essa função deve receber 3 parâmetros, fazendo o tratamento de erro caso algum dos parâmetros não seja um número.
 * Caso algum dos parâmetros não seja do tipo Number rejeite a promise e imprima na tela a frase "Digite apenas números".
