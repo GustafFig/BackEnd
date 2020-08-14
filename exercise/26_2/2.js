@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 
-const promise = async () => new Promise((resolve, reject)  => {
-  const { a, b, c } = inquirer.prompt([
+const promise = () => new Promise(async (resolve, reject)  => {
+  const { a, b, c } = await inquirer.prompt([
     { type: 'number', name: 'a', message: 'a: '},
     { type: 'number', name: 'b', message: 'b: '},
     { type: 'number', name: 'c', message: 'c: '},

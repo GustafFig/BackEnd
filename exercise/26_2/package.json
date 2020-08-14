@@ -6,11 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node 1.js",
-    "start2": "node 2.js"
+    "start2": "node 2.js",
+    "start3c": "node 3callback.js",
+    "start3p": "node 3promise.js",
+    "start3a": "node 3async.js"
   },
   "author": "Gustavo Figueiredo <gustavohmfigueiredo@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "inquirer": "^7.3.3"
+    "inquirer": "^7.3.3",
+    "readline-sync": "^1.4.10"
   }
 }
