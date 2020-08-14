@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node 1.js"
+    "start": "node 1.js",
+    "start2": "node 2.js"
   },
   "author": "Gustavo Figueiredo <gustavohmfigueiredo@gmail.com>",
   "license": "ISC",

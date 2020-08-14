@@ -14,10 +14,6 @@ const promise = () => new Promise((resolve, reject)  => {
 
     if (value < 50) return reject("Valor muito baixo");
     resolve(`Seu valor é ${value}`);
-  }).catch(() => {
-    if (typeof a !== 'number') return reject("Digite apenas números");
-    if (typeof b !== 'number') return reject("Digite apenas números");
-    if (typeof c !== 'number') return reject("Digite apenas números");
   });
 });
 
