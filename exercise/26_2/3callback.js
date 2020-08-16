@@ -1,11 +1,18 @@
-const readline = require('readline-sync');
+const readline = require('readline');
 const fs = require('fs');
 
-const file = readline.question('Insert your file: ');
-
-fs.readFile(file, 'utf-8', (err, content) => {
-  if (err) return console.log('Something went wrong');
-  console.log(content);
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
 });
 
-console.log('chegou aqui!!');
+rl.question('Insert your file: ', (name) => {
+  if (rlErr) return rlErr;
+  fs.readFile(name, (err, content) => {
+    if (err) return console.log('Something went wrong: ', err.message);
+    console.log('Tamanho do arquivo: ', content.byteLength);
+    console.log('Conteúdo')
+    console.log(content.toString('utf8'));
+  });
+  rl.close();
+});
