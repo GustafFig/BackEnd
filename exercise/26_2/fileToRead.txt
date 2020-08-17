@@ -1,0 +1,1 @@
+Vou colocar algum texto aqui para ser lido pelo node fs
