@@ -7,9 +7,9 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-const promisifiedQuestion = () => new Promise((resolve, reject) => {
+const promisifiedQuestion = (question) => new Promise((resolve, reject) => {
   try {
-    rl.question('Insert your file: ', (fileName) => {
+    rl.question(question, (fileName) => {
       resolve(fileName);
       rl.close();
     });
@@ -19,11 +19,6 @@ const promisifiedQuestion = () => new Promise((resolve, reject) => {
 });
 
 const promisifiedReadFile = util.promisify(fs.readFile);
-
-const askFile = async () => {
-  const fileName = await promisifiedQuestion();
-  return fileName;
-};
 
 const readFile = async (file) => {
   try {
@@ -39,7 +34,7 @@ const readFile = async (file) => {
 };
 
 const showFile = async () => {
-  const fileName = await askFile();
+  const fileName = await promisifiedQuestion('Insert your file: ');
   await readFile(fileName);
 };
 
