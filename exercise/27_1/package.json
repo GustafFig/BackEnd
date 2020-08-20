@@ -1,0 +1,24 @@
+{
+  "name": "27_1",
+  "version": "1.0.0",
+  "description": "Exercicio do dia 27.1 da Trybe sobre express",
+  "main": "1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node 1.js"
+  },
+  "keywords": [
+    "express",
+    "http",
+    "node"
+  ],
+  "author": "Gustavo Figueiredo",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-rescue": "^1.1.30"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
