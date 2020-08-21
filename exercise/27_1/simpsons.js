@@ -26,9 +26,8 @@ async function createSimpsonVeirfication(req, res, next) {
 
   const content = await readSimpFile();
 
-  if (content.some(({ idBd }) => idBd === id)) {
-    res.status(404);
-    res.send(`This id: ${id} already exists`);
+  if (JSON.parse(content).some((cha) => cha.id === id)) {
+    return next({ message: `This id: ${id} already exists`, error: '', code: 3, id });
   }
   next();
 }
@@ -39,6 +38,9 @@ function errMidleWare(err, _req, res, _next) {
     res.status(500);
     res.send({ message: 'Sorry we have, some inside error :(' });
   } else if (err.message === 'Missing params') {
+    res.status(400);
+    res.send({ message: err.message });
+  } else if (err.message === `This id: ${err.id} already exists`) {
     res.status(400);
     res.send({ message: err.message });
   }
@@ -64,7 +66,7 @@ const createCharacterAndResponse = rescue(async (req, res) => {
 // Exercício 7 GET e Exercicio 9 POST
 router
   .route('/')
-  .get(rescue(async (req, res) => {
+  .get(rescue(async (_req, res) => {
     const content = await readSimpFile();
 
     res.status(200).send(content);
