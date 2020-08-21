@@ -1,21 +1,39 @@
 const express = require('express');
-const rescue = require('express-rescue');
-const fetch = require('node-fetch');
+const { simpsonsRouter } = require('./simpsons');
+const simpsons = require('./simpsons');
 
 const app = express();
 
-app.get('/teste', rescue((req, res, next) => {
-  // console.log('Primeira mensagem', Object.keys(req.headers));
-  res.send({ message: 'Hello World' });
-  next();
-}));
+// Como o exercício 1 é set up da aplicação (consulte o package.json), começo aqui com o exercício 2
+app.get('/ping', (_req, res) => res.send({ message: "Pong!" }));
 
-fetch('http://localhost:3000/teste').then((res) => {
-  res.json().then(r => console.log(r))
+// Exercício 3, tratamento de erro, mais para frente.
+// ATENÇÃO, não funciona com o 4 no mesmo arquivo, precisa comentar um dos dois
+// app.post('/hello', (req, res) => {
+//   res.send({ message: `Hello, ${req.headers.username}` });
+// });
+
+// Exercício 4
+// ATENÇÃO, não funciona com o 3 no mesmo arquivo, precisa comentar um dos dois
+app.post('/hello', (req, res) => {
+  const { age, username } = req.headers;
+  if (parseInt(age) >= 18) {
+    res.send({ message: `Hello, ${username}`, age: age});
+  } else {
+    res.status(401);
+    res.send({ message: "Unhautorized" });
+  }
 });
 
-console.error('olá')
+// Exercício 5
+app.put('/users/:name/:age', (req, res) => {
+  const { age, name } = req.params;
+  res.send({ "message": `Seu nome é ${name} e você tem ${age} anos de idade` });
+});
 
-app.listen(3000, () => console.log('estamos abertos para o mundo e isso me preocupa, hehehehe'));
+// Exercício 6 -> simpsons.json
+// Exercício 7 -> simpsons.js
 
-console.log();
+app.use('/simpsons', simpsonsRouter);
+
+app.listen(3000, () => console.log('Estamos no ar'));
