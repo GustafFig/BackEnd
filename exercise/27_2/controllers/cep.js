@@ -1,20 +1,16 @@
 const { lookupCEP, fromOutside } = require('../models/cep');
 
-async function searchInformation(req, res) {
+async function searchInformation(req, res, next) {
   try {
     const { cep } = req;
     const result = await lookupCEP(cep);
-  
-    if (result) {
-      console.log('result', result.fetchAll());
-      return res.send(result.fetchAll());
-    }
+    if (result.length === 0) return res.send(result);
+    
     const outsideResult = await fromOutside(cep);
-    console.log(outsideResult);
     res.send(outsideResult);
   } catch (err) {
     console.error(err);
-    next('Seek information');
+    next('error ao procurar informação');
   }
 }
 

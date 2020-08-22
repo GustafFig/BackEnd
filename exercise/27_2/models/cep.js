@@ -30,13 +30,13 @@ async function lookupCEP(id) {
   try {
     const db = await connection();
     const table = await db.getTable('cep');
-    const cep = table
+    const cep = await table
       .select(['id', 'uf', 'cidade', 'bairro', 'logradouro'])
       .where('id', ':id')
       .bind('id', id)
       .execute();
-      console.log(cep);
-    return cep.map(transformToObj);
+    const results = await cep.fetchAll();
+    return results.map(transformToObj);
   } catch (err) {
     console.error(err);
   }
@@ -60,15 +60,3 @@ module.exports = {
   lookupCEP,
   fromOutside,
 };
-
-/*
-[
-  {
-    cep: '26465260',
-    uf: 'RJ',
-    cidade: 'Japeri',
-    bairro: 'Jardim Delamare',
-    logradouro: 'Rua Api'
-  }
-]
-*/
