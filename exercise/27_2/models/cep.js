@@ -1,8 +1,25 @@
 const mysqlx = require('@mysql/xdevapi');
 const fetch = require('node-fetch');
-const cep = require('../controllers/cep');
 
 const CEP_PATTERN = ['cep', 'uf', 'cidade', 'bairro', 'logradouro'];
+
+async function storeCep(ceps) {
+  try {
+    console.info('before insert', ceps);
+    const db = await connection();
+    const table = await db.getTable('cep');
+    const status = ceps.forEach((cepInst) => {
+      const { cep, uf, cidade, bairro, logradouro } = cepInst;
+      table
+      .insert(['id', 'uf', 'cidade', 'bairro', 'logradouro'])
+      .values(cep, uf, cidade, bairro, logradouro)
+      .execute();
+    });
+    console.info('after insert', status);
+  } catch (err) {
+    console.err(err);
+  }
+}
 
 async function connection() {
   try {
@@ -59,4 +76,5 @@ async function fromOutside(cep) {
 module.exports = {
   lookupCEP,
   fromOutside,
+  storeCep,
 };
