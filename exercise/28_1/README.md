@@ -1,4 +1,5 @@
 # Exercicos do dia 28/1 d Trybe
+
 ## MSC e conexao com MongoDB
 
 ### Exercício 1
