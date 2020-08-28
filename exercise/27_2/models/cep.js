@@ -1,3 +1,4 @@
+require('dotenv/config');
 const mysqlx = require('@mysql/xdevapi');
 const fetch = require('node-fetch');
 
@@ -33,14 +34,14 @@ async function storeCep(ceps) {
   } catch (err) {
     console.error(err);
   }
-}
+}'localhost'
 
 async function connection() {
   try {
     const session = await mysqlx.getSession({
-      user: 'root',
-      password: 'pass',
-      host: 'localhost',
+      user: process.env.USER,
+      password: process.env.PASSWORD,
+      host: process.env.HOST,
       port: 33060,
     });
     return session.getSchema('cep_lookup');  
