@@ -7,6 +7,12 @@ const app = express();
 
 app.use(bodyParser.json());
 
+app.use((req, _res, next) => {
+  console.log(req.path);
+  console.log(req.method);
+  next();
+});
+
 app.route('/')
   .get(Cep.getCepResults);
 

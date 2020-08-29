@@ -1,24 +1,35 @@
 const { Cep, externalCep } = require('../models');
 
-async function cepRce(cep) {
+/**
+ * pesquisa nas duas fontes primeiro interna
+ * @param {string ou números de 8 digitos} cep
+ */
+async function searchInsideOrOutside(cep) {
+  const response = await Cep.getByNumber();
+  
+  if (response.length !== 0) return response;
+
+  return externalCep.fetchCeps(cep);
+}
+
+async function cepRace(cep) {
   const result = await Promise.race([
-    Cep.getByNumber(cep),
+    searchInsideOrOutside(cep),
     externalCep.fetchCeps(cep),
   ]);
 
-  return result[0];
+  return result;
 }
 
-async function insertCep(result) {
-  const alreadyExists = Cep.getByNumber(result.cep);
+async function insertCep(cep, state, city, neighborhood, publicPlace) {
+  const alreadyExists = await Cep.getByNumber(cep);
+  
+  if (alreadyExists.length !== 0) return;
 
-  if (alreadyExists) return;
-
-  const { cep, state, city, neighborhood, publicPlace } = result;
-  return Cep.createCep(cep, state, city, neighborhood, publicPlace)
+  return Cep.createCep(cep, state, city, neighborhood, publicPlace);
 }
 
 module.exports = {
   insertCep,
-  cepRce,
+  cepRace,
 };

@@ -34,7 +34,7 @@ async function storeCep(ceps) {
   } catch (err) {
     console.error(err);
   }
-}'localhost'
+}
 
 async function connection() {
   try {

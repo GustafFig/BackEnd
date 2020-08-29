@@ -2,13 +2,19 @@ const rescue = require('express-rescue');
 const { Cep } = require('../services');
 
 const getCepResults = rescue(async (req, res) => {
-  const { cep, state, city, neightborhood, publicPlace } = req.body;
+  const { cep } = req.query;
+  const result = await Cep.cepRace(cep);
 
-  const result = await Cep.cepRce(cep);
+  if (result.length === 0) {
+    res.json({ message: 'Results está vazio', result });
+    return console.log('getCepResults', result);
+  }
 
-  await Cep.insertCep(result);
+  const { uf, cidade, bairro, logradouro } = result;
 
-  return res.json({ ceps });
+  await Cep.insertCep(cep, uf, cidade, bairro, logradouro);
+
+  return res.json({ result });
 });
 
 module.exports = {
