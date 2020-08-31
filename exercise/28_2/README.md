@@ -2,6 +2,8 @@
 
 ## MSC e RESTful
 
+> Estamos usando um arquivo pronto e o objetivo é refatorá-lô
+
 ### Exercício 1
 
   Pense qual é o recurso que estamos trabalhando e altere os endpoints para que fiquem padronizados.

@@ -4,7 +4,9 @@
   "description": "Exercicios do dia 28/2 da Trybe",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "debug": "nodemon index.js"
   },
   "author": "Gustavo Figueiredo",
   "license": "ISC",
