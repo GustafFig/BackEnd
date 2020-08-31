@@ -23,10 +23,10 @@ class Product {
   }
 
   add() {
-    const rawData = fs.readFileSync('./products.json')
+    const rawData = fs.readFileSync('./products.json');
     const products = JSON.parse(rawData);
 
-    this.id = products[products.length - 1].id + 1
+    this.id = products[products.length - 1].id + 1;
     products.push(this);
 
     fs.writeFile('./products.json', JSON.stringify(products), 'utf8', (err) => {
@@ -39,7 +39,7 @@ class Product {
 
   delete(id) {
     const rawData = fs.readFileSync('./products.json');
-    const products = JSON.parse(rawData).filter(product => product.id !== parseInt(id));
+    const products = JSON.parse(rawData).filter((product) => product.id !== parseInt(id));
 
     fs.writeFile('./products.json', JSON.stringify(products), 'utf8', (err) => {
       if (err) throw err;
@@ -68,7 +68,7 @@ class Product {
       console.log('write file ok');
     });
 
-    return products;
+    return product;
   }
 }
 
