@@ -13,7 +13,7 @@ router.get('/:id', (req, res) => {
   const { id } = req.params;
   const product = new ProductModel().getById(id);
 
-  res.json(product);
+  res.status(200).json(product);
 });
 
 router.post('/', (req, res) => {
@@ -22,13 +22,13 @@ router.post('/', (req, res) => {
   const newProduct = new ProductModel(name, brand);
   newProduct.add();
 
-  res.json(newProduct);
+  res.status(201).json(newProduct);
 });
 
 router.delete('/:id', (req, res) => {
   const products = new ProductModel().delete(req.params.id);
 
-  res.json(products);
+  res.status(202).json(products);
 });
 
 router.put('/:id', (req, res) => {
@@ -37,7 +37,9 @@ router.put('/:id', (req, res) => {
 
   const products = new ProductModel(name, brand).addOrUpdate(id);
 
-  res.json(products);
+  if (product.haveBeenAdded) res.status(201).json(products);
+
+  res.status(200).json(products);
 });
 
 module.exports = router;

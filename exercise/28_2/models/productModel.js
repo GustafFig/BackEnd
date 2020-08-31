@@ -54,6 +54,7 @@ class Product {
     const products = JSON.parse(rawData);
 
     const product = products.find(product => product.id === parseInt(id));
+    let haveBeenAdded = false;
 
     if (product) {
       product.name = this.name;
@@ -61,6 +62,7 @@ class Product {
     } else {
       this.id = products[products.length - 1].id + 1;
       products.push(this);
+      haveBeenAdded = true;
     }
 
     fs.writeFile('./products.json', JSON.stringify(products), 'utf8', (err) => {
@@ -68,7 +70,7 @@ class Product {
       console.log('write file ok');
     });
 
-    return product;
+    return { products, added: haveBeenAdded };
   }
 }
 
