@@ -1,45 +1,46 @@
 const express = require('express');
+const rescue = require('express-rescue');
 const ProductModel = require('../models/productModel');
 
 const router = express.Router();
 
-router.get('/', (_req, res) => {
-  const products = new ProductModel().getAll();
+router.get('/', rescue(async (_req, res) => {
+  const products = await new ProductModel().getAll();
 
   res.status(200).json(products);
-});
+}));
 
-router.get('/:id', (req, res) => {
+router.get('/:id', rescue(async (req, res) => {
   const { id } = req.params;
-  const product = new ProductModel().getById(id);
+  const productModel = new ProductModel();
+  const product = await productModel.getById(id);
 
-  res.status(200).json(product);
-});
+  return res.status(200).json(product);
+}));
 
-router.post('/', (req, res) => {
+router.post('/', rescue(async (req, res) => {
   const { name, brand } = req.body;
 
-  const newProduct = new ProductModel(name, brand);
-  newProduct.add();
+  const newProduct = await new ProductModel(name, brand).add();
 
   res.status(201).json(newProduct);
-});
+}));
 
-router.delete('/:id', (req, res) => {
-  const products = new ProductModel().delete(req.params.id);
+router.delete('/:id', rescue(async (req, res) => {
+  const products = await new ProductModel().delete(req.params.id);
 
   res.status(202).json(products);
-});
+}));
 
-router.put('/:id', (req, res) => {
+router.put('/:id', rescue(async (req, res) => {
   const { id } = req.params;
   const { name, brand } = req.body;
 
-  const products = new ProductModel(name, brand).addOrUpdate(id);
+  const products = await new ProductModel(name, brand).addOrUpdate(id);
 
-  if (product.haveBeenAdded) res.status(201).json(products);
+  if (products.haveBeenAdded) res.status(201).json(products);
 
-  res.status(200).json(products);
-});
+  res.status(200).json(products.products);
+}));
 
 module.exports = router;

@@ -5,6 +5,10 @@ const productsController = require('./controllers/productController');
 
 const app = express();
 app.use(bodyParser.json());
+app.use(({ method, path }, _, next) => {
+  console.log(`METHOD ${method}, PATH ${path}, Date ${new Date().toDateString()}`)
+  next();
+});
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
