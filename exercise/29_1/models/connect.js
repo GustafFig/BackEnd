@@ -1,7 +1,7 @@
 require('dotenv/config');
 const MongoClient = require('mongodb').MongoClient;
 
-const { MONGO_URL = 'mongodb://localhost:27017' } = process.env;
+const { MONGO_URL = 'mongodb://localhost:27017', MONGO_DB } = process.env;
 
 async function connect() {
   try {
@@ -17,7 +17,8 @@ async function connect() {
 }
 
 async function connectTo(coll) {
-  return connect().collection(coll);
+  const db = await connect()
+  return db.collection(coll);
 }
 
 module.exports = {
