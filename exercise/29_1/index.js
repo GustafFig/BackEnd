@@ -14,6 +14,7 @@ app.use((err, _req, res, _next) => {
   if (Boom.isBoom(err)) {
     res.status(err.output.statusCode).json(err.output.payload);
   }
+  console.error(err);
   res.status(500).json({ message: 'Internal Error' });
 });
 

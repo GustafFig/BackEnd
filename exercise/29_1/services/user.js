@@ -1,8 +1,16 @@
 const { users } = require('../models');
+const { mkHash, generateGens } = require('./password');
 
 async function addUser(username, password, isAdmin) {
-  const { insertedId } = await users.add(username, password, isAdmin);
-  return { _id: insertedId, username, password, isAdmin };
+  try {
+    const gen = await generateGens(10);
+    const hash = await mkHash(password, gen);
+    const { insertedId } = await users.add(username, hash, isAdmin);
+    return { _id: insertedId, username, password, isAdmin };  
+  } catch (err) {
+    console.error(err);
+    return { error: true, message: 'could not create user' };
+  }
 }
 
 async function getUserByName(username) {
