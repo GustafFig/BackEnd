@@ -7,7 +7,7 @@ const { PORT = 3000 } = process.env;
 
 app.use('/text', text);
 
-app.use((err, req, res, next) => {
+app.use((err, _req, res, _next) => {
   res.json({ errorMessage: err.message });
 });
 

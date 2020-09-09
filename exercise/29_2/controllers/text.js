@@ -2,6 +2,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const multer = require('multer');
 const rescue = require('express-rescue');
+const express = require('express');
 let counter = 0;
 const textRouter = require('express').Router();
 
@@ -22,6 +23,8 @@ const storage = multer.diskStorage({
 });
 
 const uploadText = multer({ storage });
+
+textRouter.use('/read', express.static(path.join(__dirname, 'texts')));
 
 textRouter.post('/field', uploadField.single('text'), storeTextOfBody)
 textRouter.post('/file', uploadText.single('text'), (req, res) => {
