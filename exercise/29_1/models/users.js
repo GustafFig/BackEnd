@@ -1,8 +1,8 @@
 const { connectTo } = require('./connect');
 
-async function add(username, password) {
+async function add(username, password, isAdmin = false) {
   const usersTable = await connectTo('users');
-  return usersTable.insertOne({ username, password });
+  return usersTable.insertOne({ username, password, isAdmin });
 }
 
 async function getUserByName(username) {

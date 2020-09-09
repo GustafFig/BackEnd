@@ -1,6 +1,7 @@
 require('dotenv/config');
 const rescue = require('express-rescue');
 const jwt = require('jsonwebtoken');
+const Boom = require('@hapi/boom');
 const { users: { getUserByName } } = require('../services');
 
 const { SECRET = 'preguiçaDeCriarUmSegredo' } = process.env;
@@ -9,18 +10,22 @@ module.exports = function auth(needAuthorization = true) {
   return rescue(async (req, res, next) => {
     const { authorization: token } = req.headers || {};
 
-    if (!token && needAuthorization) return res.status(401).json({ error: 'Cannot find token' });
+    if (!token && needAuthorization) return next(Boom.unauthorized('Cannot find Token'));
 
-    const decoded = jwt.verify(token, SECRET);
+    try {
+      const decoded = jwt.verify(token, SECRET);
 
-    if (!decoded) return res.status(401).json({ error: 'Cannot find needed info' });
+      if (!decoded) return next(Boom.unauthorized('Cannot find needed info'));
 
-    const user = await getUserByName(decoded.username);
+      const user = await getUserByName(decoded.username);
 
-    if (!user && needAuthorization) return res.staut(401).json('Cannot find you');
-
-    req.user = user;
-
-    next();
+      if (!user && needAuthorization) return next(Boom.unauthorized('Cannot find you'));
+  
+      req.user = user;
+  
+      next();  
+    } catch (err) {
+      next(Boom.unauthorized('Token expired'));
+    }
   });
 }

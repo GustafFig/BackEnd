@@ -2,25 +2,27 @@ const { Router } = require('express');
 const rescue = require('express-rescue');
 const jwt = require('jsonwebtoken');
 const { users, posts } = require('../services');
-const auth = require('../middlewares/auth');
+const { auth, adminAuth } = require('../middlewares');
 
 const API = Router();
 
 const { SECRET = 'preguiçaDeCriarUmSegredo' } = process.env;
 
 const tokenConfig = {
-  expiresIn: 60,
+  expiresIn: 300,
   algorithm: 'HS256',
 };
 
-async function createUser(req, res) {
-  const { username, password } = req.body;
+function createUser(isAdmin = false) {
+  return async (req, res) => {
+    const { username, password } = req.body;
 
-  if (!username, !password) return res.status(400).json({ error: 'invalid data' });
+    if (!username, !password) return res.status(400).json({ error: 'invalid data' });
 
-  const newUser = await users.addUser(username, password);
+    const newUser = await users.addUser(username, password, isAdmin);
 
-  return res.status(201).json(newUser);
+    return res.status(201).json(newUser);
+  }
 }
 
 async function login(req, res) {
@@ -44,19 +46,28 @@ async function login(req, res) {
   }
 }
 
-async function getPosts(req, res) {
+async function getPosts(_req, res) {
   const allPosts = await posts.getAll();
-  console.log('allPosts', allPosts)
-  res.status(200).json({ posts: allPosts });
+  return res.status(200).json({ posts: allPosts });
+}
+
+async function createPost(req, res) {
+  const { name, text } = req.body || {};
+  const newPost = await posts.addPost(name, text);
+  return res.status(201).json({ post: newPost });
 }
 
 API.route('/users')
-  .post(rescue(createUser));
+  .post(rescue(createUser(false)));
+
+API.route('/users/admin')
+  .post(rescue(createUser(true)));
 
 API.route('/login')
   .post(rescue(login));
 
 API.route('/posts')
+  .post(adminAuth(true), rescue(createPost))
   .get(auth(true), rescue(getPosts));
 
 API.route('/ping').get((_req, res) => res.send('pong'));
