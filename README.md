@@ -8,3 +8,6 @@ Com conteúdos de
 2. MongoDB
 3. Node
 4. Express
+5. REST
+6. JWT
+7. Multer
