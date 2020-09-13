@@ -14,7 +14,7 @@ app.use('/text', text);
 app.use('/img', img);
 app.use('/multi', multi);
 app.route('/uploads')
-  .get(rescue(async (req, res) => {
+  .get(rescue(async (_req, res) => {
     const files = await Promise.all([
       await fs.readdir(join(__dirname, '/controllers/texts')),
       await fs.readdir(join(__dirname, '/controllers/imgs')),
@@ -24,7 +24,6 @@ app.route('/uploads')
       ...imgs.map((name) => createLink('imgs', name)),
       ...multi.map((name) => createLink('multi', name)),
     ]);
-    console.log(files);
     res.status(200).json({ files });
   }));
 
