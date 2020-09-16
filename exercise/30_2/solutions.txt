@@ -1,0 +1,22 @@
+1:
+  1.1: pm2 start index.js --name exercises # note que o(s) proceso(s) chamará exercises nos outros comandos
+  1.2.1: pm2 restart exercises # com down time
+  1.2.2: pm2 reload exercises # sem down time
+  1.3: pm2 stop exercises
+  1.4: pm2 scale exercises +5
+  1.5: pm2 scale exercises 3 # gera um error por que tinha mais de 3 antes, sendo necessario executar 1.2.1 novamente
+  1.6: pm2 delete exercises
+
+2: Colocar no arquivo criado (ecosystem.config.yml) e rodar com `pm2 start ecosystem.config.yml`
+  2.1:
+    apps:
+      name: exercises
+      script: index.js
+      watch: true
+  2.2: (acrescente ao arquivo em apps)
+    exec_mode: cluster
+    instances: max
+  2.3: (acrescente ao arquivo em apps)
+    max_memory_restart: 100M
+
+3: (Exercício 3 está no arquivo ecosystem.config.yml)
