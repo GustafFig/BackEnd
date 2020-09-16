@@ -1,0 +1,21 @@
+apps:
+- name: exercises
+  script: ./index.js
+  watch: true
+  max_memory_restart: 100M
+  env_prod:
+    ENV: produção
+    PORT: 3000
+  env_homolog:
+    PORT: 3000
+    ENV: homologação
+- name: exercise2
+  script: index.js
+  watch: true
+  max_memory_restart: 100M
+  env_prod:
+    PORT: 3001
+    ENV: producao2
+  env_homolog:
+    ENV: homologaçao2
+    PORT: 3001    
