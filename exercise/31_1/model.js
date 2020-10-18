@@ -49,12 +49,13 @@ const createNewPlant = (id, breed, needsSun, origin, specialCare, size) => {
 
 const getPlants = () => defaultPlants;
 
-const getPlantById = (id) => defaultPlants.filter((plant) => plant.id === id);
+const getPlantById = (id) => (defaultPlants.filter((plant) => plant.id === id) || [])[0];
 
 const editPlant = (plantId, newPlant) =>
-  defaultPlants = defaultPlants.map((plant) => plant.id === plantId ? newPlant : plant);
+  defaultPlants = defaultPlants.map((plant) => plant.id === parseInt(plantId) ? newPlant : plant);
 
-const removePlantById = (id) => defaultPlants = defaultPlants.filter((plant) => plant.id !== id);
+const removePlantById = (id) =>
+  defaultPlants = defaultPlants.filter((plant) => plant.id !== parseInt(id));
 
 module.exports = {
   createNewPlant,
