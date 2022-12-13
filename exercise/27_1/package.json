@@ -16,7 +16,7 @@
   "author": "Gustavo Figueiredo",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-rescue": "^1.1.30"
   },
   "devDependencies": {
